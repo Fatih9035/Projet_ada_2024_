@@ -1,0 +1,25 @@
+WITH Ada.Text_IO,Ada.Integer_Text_IO,ada.Characters.Handling;
+USE Ada.Text_IO,Ada.Integer_Text_IO,Ada.Characters.Handling;
+
+PACKAGE BODY Gestion_Inscription IS
+
+   PROCEDURE Inscription (
+      Personnel: IN OUT T_Personnel;
+         S: OUT Identite) IS
+   K:Integer;
+   S:String(1..20);
+   Pr:T_Mot:=(OTHERS=>'');
+   ok: Boolean:=false;
+
+BEGIN
+   Put("Entrer le prenom de l'employer");
+   Get_Line(Pr,K);
+   IF Homonymes(Pr,K) THEN
+      Put_Line("Deja inscrit");
+   ELSE
+      FOR I IN E'RANGE LOOP
+         IF E(I).Present=False THEN
+            Ok:=True;
+            Put("Prenom");Get_LineE(I).Prenom,K);
+            Put("Nom");Get_line;
+            Put

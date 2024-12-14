@@ -1,0 +1,47 @@
+WITH Ada.Text_IO,Ada.Integer_Text_IO,ada.Characters.Handling;
+USE Ada.Text_IO,Ada.Integer_Text_IO,Ada.Characters.Handling;
+
+PACKAGE BODY Gestion_Inscription IS
+
+   PROCEDURE Inscription (E: in out T_Reg) is
+   K:Integer;
+   S:String(1..20);
+   Pr:T_Mot:=(OTHERS=>'');
+   ok: Boolean:=false;
+
+   BEGIN
+
+      LOOP
+         Put("Saisissez le prenom de l'employer: ");
+         Get_Line(P,K);
+         Ok := True;
+         P := To_upper(P); -- Mettre les lettres en majuscule
+         FOR I IN P'RANGE LOOP
+            CASE P(I) IS
+               WHEN 'A'..'Z' =>
+                  NULL; -- Le prénom doit comporter des lettres
+               WHEN 'a'..'z' =>
+                  NULL;
+               WHEN ' ' =>
+                  EXIT; -- Lorsque l'utilisateur fait un espace, la procedure est quittée
+               WHEN '-' => -- Le prénom peut comporter des - qui sont suivis et précédés d'une lettre
+                  IF ((I = P'First) OR ELSE (I = P'Last)) OR ELSE ((P(I-1) = '-') OR ELSE (
+                           P(I+1) = ' ')) THEN
+                     Ok := False;
+                     EXIT;
+                  END IF;
+               WHEN ''' => -- Le prénom peut comporter des ' qui sont suivis et précédés d'une lettre
+                  IF ((I = P'First) OR ELSE (I =P'Last)) OR ELSE ((P(I-1) = ''') OR ELSE (
+                           P(I+1) = ' ')) THEN
+                     Ok := False;
+                     EXIT;
+                  END IF;
+               WHEN OTHERS =>
+                  Ok := False;
+                  EXIT;
+            END CASE;
+         END LOOP;
+         EXIT WHEN Ok = True;
+         Put_Line ("Erreur de saisie, recommencez");
+      END LOOP;
+

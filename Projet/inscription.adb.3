@@ -1,0 +1,86 @@
+WITH Ada.Text_IO,Ada.Integer_Text_IO,ada.Characters.Handling;
+USE Ada.Text_IO,Ada.Integer_Text_IO,Ada.Characters.Handling;
+
+PACKAGE BODY Gestion_Inscription IS
+
+   PROCEDURE Inscription (Pr,Nm: out T_mot) is
+   K:Integer;
+   S:String(1..20);
+      Ok: Boolean:=True;
+      Pr:=(OTHERS => '');
+      Nm:=(others => '');
+
+   BEGIN
+
+      LOOP
+         Put("Saisissez le prenom de l'employer: ");
+         Get_Line(Pr,K);
+         Ok := True;
+
+         -- Mettre les lettres en majuscule --
+         Pr := To_upper(P);
+         FOR I IN Pr'RANGE LOOP
+            CASE Pr(I) IS
+               WHEN 'A'..'Z' =>
+                  NULL;
+               WHEN 'a'..'z' =>
+                  NULL;
+               WHEN ' ' =>
+                  EXIT;
+               WHEN '-' => -- Le prenom peut contenir des " - " si il est entouré par des lettres
+                  IF ((I = Pr'First) OR ELSE (I = Pr'Last)) OR ELSE ((Pr(I-1) = '-') OR ELSE (
+                           Pr(I+1) = ' ')) THEN
+                     Ok := False;
+                     EXIT;
+                  END IF;
+               WHEN ''' => -- Le prenom peut contenir des " ' " si il est entouré par des lettres
+                  IF ((I = Pr'First) OR ELSE (I =Pr'Last)) OR ELSE ((Pr(I-1) = ''') OR ELSE (
+                           Pr(I+1) = ' ')) THEN
+                     Ok := False;
+                     EXIT;
+                  END IF;
+               WHEN OTHERS =>
+                  Ok := False;
+                  EXIT;
+            END CASE;
+         END LOOP;
+         EXIT WHEN Ok = True;
+         Put_Line ("commander impossible, erreur");
+      END LOOP;
+      loop
+          Put("Saisissez le nom de l'employer: ");
+         Get_Line(Nm,K);
+         Ok := True;
+
+         -- Mettre les lettres en majuscule --
+         Nm := To_upper(Nm);
+         FOR I IN Nm'RANGE LOOP
+            CASE Nm(I) IS
+               WHEN 'A'..'Z' =>
+                  NULL;
+               WHEN 'a'..'z' =>
+                  NULL;
+               WHEN ' ' =>
+                  EXIT;
+               WHEN '-' => -- Le prenom peut contenir des " - " si il est entouré par des lettres
+                  IF ((I = Nm'First) OR ELSE (I = Nm'Last)) OR ELSE ((Nm(I-1) = '-') OR ELSE (
+                           Nm(I+1) = ' ')) THEN
+                     Ok := False;
+                     EXIT;
+                  END IF;
+               WHEN ''' => -- Le prenom peut contenir des " ' " si il est entouré par des lettres
+                  IF ((I = Nm'First) OR ELSE (I =Nm'Last)) OR ELSE ((Nm(I-1) = ''') OR ELSE (
+                           Nm(I+1) = ' ')) THEN
+                     Ok := False;
+                     EXIT;
+                  END IF;
+               WHEN OTHERS =>
+                  Ok := False;
+                  EXIT;
+            END CASE;
+         END LOOP;
+         EXIT WHEN Ok = True;
+         Put_Line ("commander impossible, erreur");
+      END LOOP;
+      Put_Line("Nom et prenom de l'enployer enregistre");
+      end Inscriptio

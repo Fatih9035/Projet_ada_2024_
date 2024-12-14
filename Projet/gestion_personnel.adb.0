@@ -1,0 +1,15 @@
+WITH Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_Io,Outils;
+USE Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_Io,Outils;
+
+PACKAGE BODY Gestion_Personnel IS
+
+   PROCEDURE Inscrit (
+         R: OUT T_Personnel) IS
+
+   BEGIN
+
+   I
+
+   End Gestion_personnel;
+
+
